@@ -121,7 +121,6 @@ const Recursos: React.FC = () => {
             });
         }
     };
-
     return (
         <div className='receita'>
             <h2>Recursos</h2>

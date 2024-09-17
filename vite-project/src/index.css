@@ -1,38 +1,115 @@
-.hero-section {
-    display: flex;
+/* General Page Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #c9bf9d;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #b4ac8d;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+nav {
+    margin-bottom: 30px;
     padding: 20px;
 }
-
-.sidebar {
-    width: 200px;
-    border-right: 1px solid #ddd;
-    padding-right: 20px;
+/* Navigation Links */
+nav a {
+    margin: 0 15px;
+    text-decoration: none;  
 }
 
-.content {
-    flex: 1;
-    padding-left: 20px;
+nav a:hover {
+    text-decoration: underline;
 }
 
-ul {
+/* Main Container */
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+/* Left Section */
+.left-section {
+    width: 30%;
+    background-color: #c9bf9d;;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.left-section img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.left-section select, .left-section input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #5e5c53;
+    border-radius: 5px;
+}
+
+/* Right Section */
+.right-section {
+    width: 65%;
+    background-color: #c9bf9d;;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.right-section h2 {
+    color: #4CAF50;
+}
+
+.right-section ul {
     list-style-type: none;
     padding: 0;
 }
 
-li {
-    margin: 10px 0;
+.right-section ul li {
+    margin: 5px 0;
+    font-size: 1.1em;
 }
 
-li:hover {
+.right-section ul li span {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Add Button */
+button {
+    background-color: #b4ac8d;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    color: blue;
 }
 
-.iten-info {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
+button:hover {
+    background-color: #5e5c53;
 }
+
+/* Footer */
+footer {
+    margin-top: 30px;
+    text-align: center;
+    color: #777;
+    padding: 10px;
+    font-size: 0.9em;
+}
+
 
 img {
     max-width: 100%;
@@ -52,4 +129,192 @@ input {
     padding: 20px;
     border: 1px solid #ccc;
     z-index: 1000
-}  
+}
+.item-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #c9bf9d; /* Cor de fundo clara */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombras suaves */
+    max-width: 250px;
+  }
+  
+  .item-selector a {
+    font-size: 16px;
+    color: #333;
+    padding: 8px 0;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .item-selector a:hover {
+    color: #5e5c53; /* Cor de destaque ao passar o mouse */
+    cursor: pointer;
+  }
+  
+  .item-selector button {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background-color: #b4ac8d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .item-selector button:hover {
+    background-color: #5e5c53; /* Cor de destaque ao passar o mouse no botão */
+  }
+  
+  .global-resource-manager {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #c9bf9d; /* Fundo claro */
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 0 auto; /* Centralizar a div */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adicionar sombra */
+  }
+  
+  .resource-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px; /* Espaçamento entre os itens */
+    padding: 8px;
+    background-color: #c9bf9d; /* Fundo branco */
+    border-radius: 4px; /* Cantos arredondados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra leve */
+  }
+  
+  .resource-row input,
+  .resource-row select {
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .resource-row input[type="text"] {
+    flex: 3; /* Para o nome ser maior */
+  }
+  
+  .resource-row input[type="number"],
+  .resource-row input[type="text"]:nth-child(3) {
+    flex: 1; /* Para quantidade e valor terem o mesmo tamanho */
+  }
+  
+  .resource-row .currency {
+    margin-left: 5px;
+  }
+  
+  .save-button {
+    padding: 10px 20px;
+    background-color: #5e5c53;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+  }
+  
+  .save-button:hover {
+    background-color: #5e5c53; /* Efeito de hover no botão */
+  }
+  
+/* General styling remains the same */
+/* Receita.css */
+
+.receita {
+    font-family: Arial, sans-serif;
+    color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #c9bf9d;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.receita h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.receita ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.receita li {
+    background-color: #b4ac8d;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.receita .cost-stats {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.receita .cost-stats p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.receita h3 {
+    font-size: 20px;
+    margin-top: 20px;
+    color: #333;
+}
+
+.receita .currency {
+    font-weight: bold;
+    color: #666;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left-section, .right-section {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .right-section ul li {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        font-size: 1.2em;
+    }
+
+    nav a {
+        display: block;
+        margin: 10px 0;
+    }
+
+    button {
+        width: 100%;
+    }
+}

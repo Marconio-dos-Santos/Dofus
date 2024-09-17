@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+type CostHistory = {
+    amount: number;
+    date: string;
+};
+
 type Ingredient = {
     name: string;
     quantity: number;
-    cost: number;
+    cost: CostHistory[]; // Updated cost structure
 };
 
 interface Item {
@@ -19,12 +24,12 @@ interface Item {
 interface AddItemModalProps {
     isOpen: boolean;
     onClose: () => void;
-    onItemAdded: () => void; // Callback para atualizar a lista de itens após adicionar
+    onItemAdded: () => void;
 }
 
 const AddItemModal: React.FC<AddItemModalProps> = ({ isOpen, onClose, onItemAdded }) => {
     const [newItem, setNewItem] = useState<Item>({
-        id: Date.now(), // Gerando um ID único baseado no timestamp
+        id: Date.now(),
         type: '',
         name: '',
         image: '',
@@ -35,95 +40,111 @@ const AddItemModal: React.FC<AddItemModalProps> = ({ isOpen, onClose, onItemAdde
     const [newIngredient, setNewIngredient] = useState<Ingredient>({
         name: '',
         quantity: 0,
-        cost: 0
+        cost: [] // Initialize as empty array for cost
     });
 
     const handleAddIngredient = () => {
+        if (!newIngredient.name || newIngredient.quantity <= 0 || newIngredient.cost.length === 0) {
+            alert("Please fill out the ingredient fields properly.");
+            return;
+        }
         setNewItem((prevItem) => ({
             ...prevItem,
             receita: [...prevItem.receita, newIngredient]
         }));
-        setNewIngredient({ name: '', quantity: 0, cost: 0 }); // Reseta o ingrediente após adicionar
+        setNewIngredient({ name: '', quantity: 0, cost: [] });
+    };
+
+    const handleCostChange = (amount: number) => {
+        setNewIngredient({
+            ...newIngredient,
+            cost: [{ amount, date: new Date().toISOString() }] // Add cost with current date
+        });
     };
 
     const handleSave = () => {
+        if (!newItem.name || !newItem.type || newItem.venda <= 0 || newItem.receita.length === 0) {
+            alert("Please complete the item details and add at least one ingredient.");
+            return;
+        }
+
         axios.post('http://localhost:5000/itens', newItem)
             .then(() => {
-                onItemAdded(); // Atualiza a lista de itens após adicionar
-                onClose(); // Fecha o modal
-                alert('Item adicionado com sucesso!');
+                onItemAdded(); // Refresh the item list
+                onClose(); // Close the modal
+                alert('Item successfully added!');
             })
             .catch(error => {
-                console.error('Erro ao adicionar item:', error);
+                console.error('Error adding item:', error);
+                alert('Error adding item. Please try again.');
             });
     };
 
-    if (!isOpen) return null; // Não renderiza o modal se ele não estiver aberto
+    if (!isOpen) return null;
 
     return (
         <div className="modal">
             <div className="modal-content">
-                <h2>Adicionar Novo Item</h2>
+                <h2>Add New Item</h2>
 
-                {/* Formulário para o novo item */}
+                {/* New Item Form */}
                 <input 
                     type="text" 
-                    placeholder="Tipo (Ex: Hat)" 
+                    placeholder="Type (Ex: Hat)" 
                     value={newItem.type} 
                     onChange={(e) => setNewItem({ ...newItem, type: e.target.value })} 
                 />
                 <input 
                     type="text" 
-                    placeholder="Nome do Item" 
+                    placeholder="Item Name" 
                     value={newItem.name} 
                     onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} 
                 />
                 <input 
                     type="text" 
-                    placeholder="URL da Imagem" 
+                    placeholder="Image URL" 
                     value={newItem.image} 
                     onChange={(e) => setNewItem({ ...newItem, image: e.target.value })} 
                 />
                 <input 
                     type="number" 
-                    placeholder="Valor de Venda" 
+                    placeholder="Selling Price" 
                     value={newItem.venda} 
                     onChange={(e) => setNewItem({ ...newItem, venda: parseFloat(e.target.value) })} 
                 />
 
-                {/* Formulário para adicionar um novo ingrediente */}
-                <h3>Adicionar Receita</h3>
+                {/* New Ingredient Form */}
+                <h3>Add Recipe</h3>
                 <input 
                     type="text" 
-                    placeholder="Nome do Ingrediente" 
+                    placeholder="Ingredient Name" 
                     value={newIngredient.name} 
                     onChange={(e) => setNewIngredient({ ...newIngredient, name: e.target.value })} 
                 />
                 <input 
                     type="number" 
-                    placeholder="Quantidade" 
+                    placeholder="Quantity" 
                     value={newIngredient.quantity} 
                     onChange={(e) => setNewIngredient({ ...newIngredient, quantity: parseInt(e.target.value) })} 
                 />
                 <input 
                     type="number" 
-                    placeholder="Custo do Ingrediente" 
-                    value={newIngredient.cost} 
-                    onChange={(e) => setNewIngredient({ ...newIngredient, cost: parseFloat(e.target.value) })} 
+                    placeholder="Ingredient Cost" 
+                    onChange={(e) => handleCostChange(parseFloat(e.target.value))}
                 />
-                <button onClick={handleAddIngredient}>Adicionar Ingrediente</button>
+                <button onClick={handleAddIngredient}>Add Ingredient</button>
 
-                {/* Exibe os ingredientes adicionados */}
+                {/* Display added ingredients */}
                 <ul>
                     {newItem.receita.map((ingredient, index) => (
                         <li key={index}>
-                            {ingredient.quantity}x {ingredient.name} - Custo: R$ {ingredient.cost.toFixed(2)}
+                            {ingredient.quantity}x {ingredient.name} - Cost: R$ {ingredient.cost[0]?.amount.toFixed(2)} (Date: {ingredient.cost[0]?.date})
                         </li>
                     ))}
                 </ul>
 
-                <button onClick={handleSave}>Salvar Item</button>
-                <button onClick={onClose}>Fechar</button>
+                <button onClick={handleSave}>Save Item</button>
+                <button onClick={onClose}>Close</button>
             </div>
         </div>
     );

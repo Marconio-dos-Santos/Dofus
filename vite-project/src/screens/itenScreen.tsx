@@ -1,30 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-type Ingredient = {
+type IngredientWithCostNumber = {
     name: string;
     quantity: number;
-    cost: number;
+    cost: { amount: number; date: string }[];
 };
-
-interface Item {
+  
+  type ItemWithCostNumber = {
     id: number;
     type: string;
     name: string;
     image: string;
     venda: number;
-    receita: Ingredient[];
-}
+    receita: IngredientWithCostNumber[];
+  };
+  
 
-const ItensScreen: React.FC<{ item: Item }> = ({ item }) => {
+const ItensScreen: React.FC<{ item: ItemWithCostNumber }> = ({ item }) => {
     const [venda, setVenda] = useState<number>(item.venda); // Estado para armazenar o valor de venda editável
     const [totalCost, setTotalCost] = useState<number>(0); // Estado para o custo total
+
+    const formatNumber = (amount: number) => {
+        return new Intl.NumberFormat('pt-BR').format(amount);
+      };
 
     // Recalcular o custo total da receita sempre que a receita do item mudar
     useEffect(() => {
         const calculateTotalCost = () => {
             const cost = item.receita.reduce((total, ingredient) => {
-                return total + (ingredient.cost * ingredient.quantity);
+                const latestCost = ingredient.cost[ingredient.cost.length - 1]?.amount || 0;
+                return total + latestCost * ingredient.quantity
             }, 0);
             setTotalCost(cost);
         };
@@ -33,7 +39,7 @@ const ItensScreen: React.FC<{ item: Item }> = ({ item }) => {
     }, [item.receita]); // Dependência é a receita do item
 
     // Calcular o lucro (venda - custo total)
-    const lucro = venda - totalCost;
+    const lucro = item.venda - totalCost;
 
     // Função para salvar a nova venda no json-server
     const handleSave = () => {
@@ -61,14 +67,14 @@ const ItensScreen: React.FC<{ item: Item }> = ({ item }) => {
                     Venda: 
                     <input 
                         type="number"
-                        value={venda} // Controlado pelo estado de venda
+                        value={item.venda} // Controlado pelo estado de venda
                         onChange={(e) => setVenda(parseFloat(e.target.value))}
                         style={{ width: '80px', marginLeft: '10px' }}
-                    /> R$
+                    /> - K
                 </p>
                 
-                <p>Custo Total: R$ {totalCost.toFixed(2)}</p>
-                <p>Lucro: R$ {lucro.toFixed(2)}</p>
+                <p>Custo Total: K : {formatNumber(totalCost)}</p>
+                <p>Lucro: K : {formatNumber(lucro)}</p>
                 <button onClick={handleSave}>Salvar</button>
             </div>
         </div>

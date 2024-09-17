@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+type CostHistory = {
+    amount: number;
+    date: string;
+};
+
 type Ingredient = {
     id: any;
     name: string;
+    cost: CostHistory[];
     quantity: number;
-    cost: number;
 };
 
 type Item = {
@@ -17,26 +22,24 @@ type Item = {
 
 const ManageRecursos: React.FC = () => {
     const [recursosGlobais, setRecursosGlobais] = useState<Ingredient[]>([]);
+    const [editedRecursos, setEditedRecursos] = useState<Ingredient[]>([]);
+    const [newCost, setNewCost] = useState<Map<number, number>>(new Map());
     const [itens, setItens] = useState<Item[]>([]);
     const [message, setMessage] = useState<string | null>(null);
 
     useEffect(() => {
-        // Verifique se a URL está correta
+        // Fetching global resources
         axios.get('http://localhost:5000/recursos')
             .then(response => {
                 const recursosData = response.data;
-                if (Array.isArray(recursosData)) {
-                    setRecursosGlobais(recursosData);
-                } else if (recursosData.recursos) {
-                    setRecursosGlobais(recursosData.recursos);
-                } else {
-                    console.error('Formato de dados inesperado para recursos globais:', recursosData);
-                }
+                setRecursosGlobais(recursosData);
+                setEditedRecursos(JSON.parse(JSON.stringify(recursosData)));
             })
             .catch(error => {
                 console.error('Erro ao buscar recursos globais:', error);
             });
 
+        // Fetching items that use resources
         axios.get('http://localhost:5000/itens')
             .then(response => {
                 setItens(response.data);
@@ -46,48 +49,78 @@ const ManageRecursos: React.FC = () => {
             });
     }, []);
 
-    const handleInputChange = (index: number, field: 'quantity' | 'cost', value: number) => {
-        const updatedRecursos = [...recursosGlobais];
-        updatedRecursos[index] = { ...updatedRecursos[index], [field]: value };
-        setRecursosGlobais(updatedRecursos);
+    const handleInputChange = (index: number, field: 'name' | 'cost', value: string | number) => {
+        const updatedRecursos = [...editedRecursos];
+        if (field === 'name') {
+            updatedRecursos[index].name = value as string;
+            setEditedRecursos(updatedRecursos);
+        } else if (field === 'cost') {
+            handleCostChange(index, parseFloat(value as string));
+        }
     };
 
+    const handleCostChange = (index: number, value: number) => {
+        setNewCost(prevNewCost => new Map(prevNewCost).set(index, value));
+    };
+
+    const handleCostDelete = (recursoIndex: number, costIndex: number) => {
+        const updatedRecursos = [...editedRecursos];
+        updatedRecursos[recursoIndex].cost = updatedRecursos[recursoIndex].cost.filter((_, idx) => idx !== costIndex);
+        setEditedRecursos(updatedRecursos);
+    };
+
+    // Function to synchronize resources with items
     const synchronizeItemsWithGlobalRecursos = () => {
         const updatedItens = itens.map(item => {
-            const updatedReceita = item.receita.map(ingredient => {
+            const updatedReceita = item.receita.map((ingredient) => {
                 const matchingRecurso = recursosGlobais.find(recurso => recurso.name === ingredient.name);
                 if (matchingRecurso) {
-                    return { ...ingredient, quantity: matchingRecurso.quantity, cost: matchingRecurso.cost };
+                    const latestCost = matchingRecurso.cost[matchingRecurso.cost.length - 1];
+                    return {
+                        ...ingredient,
+                        cost: matchingRecurso.cost, // Ensure we update the cost in the items
+                        quantity: ingredient.quantity
+                    };
                 }
                 return ingredient;
             });
-
             return { ...item, receita: updatedReceita };
         });
 
+        // Update each item on the server
         updatedItens.forEach(item => {
-            const hasChanges = item.receita.some(ingredient =>
-                recursosGlobais.some(recurso => recurso.name === ingredient.name)
-            );
-
-            if (hasChanges) {
-                axios.put(`http://localhost:5000/itens/${item.id}`, item)
-                    .catch(error => {
-                        console.error(`Erro ao atualizar item ${item.id}:`, error);
-                    });
-            }
+            axios.put(`http://localhost:5000/itens/${item.id}`, item)
+                .catch(error => {
+                    console.error(`Erro ao atualizar item ${item.id}:`, error);
+                });
         });
     };
 
     const handleSave = () => {
-        // Atualize cada recurso individualmente
+        const updatedRecursos = [...editedRecursos];
+
+        // Update costs
+        newCost.forEach((amount, index) => {
+            if (amount) {
+                updatedRecursos[index].cost = [
+                    ...updatedRecursos[index].cost,
+                    { amount, date: new Date().toISOString() }
+                ];
+            }
+        });
+
+        setRecursosGlobais(updatedRecursos);
+
+        // Save resources
         Promise.all(
-            recursosGlobais.map(recurso =>
+            updatedRecursos.map(recurso =>
                 axios.put(`http://localhost:5000/recursos/${recurso.id}`, recurso)
             )
         )
         .then(() => {
             setMessage('Recursos globais atualizados com sucesso!');
+            setNewCost(new Map());  // Clear new costs after successful save
+            // Synchronize resources with items after resources are updated
             synchronizeItemsWithGlobalRecursos();
         })
         .catch(error => {
@@ -95,37 +128,77 @@ const ManageRecursos: React.FC = () => {
             setMessage('Erro ao atualizar recursos globais.');
         });
     };
-    
+
+    const calculateCostStatistics = (costs: CostHistory[]) => {
+        if (costs.length === 0) {
+            return { min: 0, max: 0, average: 0 };
+        }
+
+        const amounts = costs.map(cost => cost.amount);
+        const min = Math.min(...amounts);
+        const max = Math.max(...amounts);
+        const average = amounts.reduce((acc, amount) => acc + amount, 0) / amounts.length;
+
+        return { min, max, average };
+    };
 
     return (
-        <div className='manage-recursos'>
+        <div className="global-resource-manager">
             <h2>Gerenciar Recursos Globais</h2>
-            <ul>
-                {recursosGlobais.map((recurso, index) => (
-                    <li key={recurso.id}>
+            {recursosGlobais.map((recurso, recursoIndex) => {
+                const { min, max, average } = calculateCostStatistics(recurso.cost);
+
+                return (
+                    <div key={recurso.id} className="resource-row">
                         <input
                             type="text"
-                            value={recurso.name}
-                            readOnly
+                            value={editedRecursos[recursoIndex].name}
+                            onChange={(e) => handleInputChange(recursoIndex, 'name', e.target.value)}
                             style={{ marginRight: '10px' }}
                         />
+
                         <input
                             type="number"
-                            value={recurso.quantity}
-                            onChange={(e) => handleInputChange(index, 'quantity', parseInt(e.target.value))}
-                            style={{ width: '50px', marginRight: '10px' }}
-                        />
-                        <input
-                            type="number"
-                            value={recurso.cost}
-                            onChange={(e) => handleInputChange(index, 'cost', parseFloat(e.target.value))}
+                            placeholder="Novo custo"
+                            value={newCost.get(recursoIndex) || ''}
+                            onChange={(e) => handleInputChange(recursoIndex, 'cost', e.target.value)}
                             step="0.01"
                             style={{ width: '80px', marginLeft: '10px' }}
-                        /> R$
-                    </li>
-                ))}
-            </ul>
-            <button onClick={handleSave}>Salvar Alterações</button>
+                        />
+                        <span className="currency">K</span>
+
+                        <div className="cost-history">
+                            <p>Histórico de custos:</p>
+                            <ul>
+                                {recurso.cost.map((c, costIndex) => (
+                                    <li key={costIndex}>
+                                        <input
+                                            type="number"
+                                            value={c.amount}
+                                            readOnly
+                                            style={{ width: '80px' }}
+                                        />
+                                        <input
+                                            type="date"
+                                            value={c.date.split('T')[0]}
+                                            readOnly
+                                            style={{ marginLeft: '10px' }}
+                                        />
+                                        <button onClick={() => handleCostDelete(recursoIndex, costIndex)}>Deletar</button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div className="cost-stats">
+                            <p>Menor custo: {min.toFixed(2)}</p>
+                            <p>Maior custo: {max.toFixed(2)}</p>
+                            <p>Média dos custos: {average.toFixed(2)}</p>
+                        </div>
+                    </div>
+                );
+            })}
+            <button className="save-button" onClick={handleSave}>Salvar Alterações</button>
             {message && <p>{message}</p>}
         </div>
     );

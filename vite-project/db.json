@@ -1,287 +1,312 @@
 {
   "recursos": [
     {
-      "id": "1",
-      "name": "Dark Treechnid Amber",
-      "quantity": 10,
-      "cost": 20,
-      "receita": [
+      "id": "740d",
+      "name": "Raiz Treechnid",
+      "cost": [
         {
-          "id": "1",
-          "name": "Dark Treechnid Amber",
-          "quantity": 10,
-          "cost": 20
-        },
-        {
-          "id": "2",
-          "name": "Luigie Mushroom",
-          "quantity": 10,
-          "cost": 7.54
-        },
-        {
-          "id": "3",
-          "name": "Soft Oak Bark",
-          "quantity": 10,
-          "cost": "3"
-        },
-        {
-          "id": "4",
-          "name": "Soft Oak Root",
-          "quantity": 10,
-          "cost": 4
-        },
-        {
-          "id": "5",
-          "name": "Soft Oak Amber",
-          "quantity": 2,
-          "cost": 12
-        },
-        {
-          "id": "6",
-          "name": "Ancestral Treechelmet",
-          "quantity": 1,
-          "cost": 100
-        },
-        {
-          "id": "7",
-          "name": "Soft Oak Bud",
-          "quantity": 1,
-          "cost": 20
-        },
-        {
-          "id": "8",
-          "name": "Treechelmet",
-          "quantity": 1,
-          "cost": 80
-        },
-        {
-          "id": "9",
-          "name": "Royal Mushroom",
-          "quantity": 5,
-          "cost": 10
-        },
-        {
-          "id": "10",
-          "name": "Golden Leaf",
-          "quantity": 3,
-          "cost": 25
-        },
-        {
-          "id": "11",
-          "name": "Enchanted Wood",
-          "quantity": 2,
-          "cost": 45
-        },
-        {
-          "id": "12",
-          "name": "casca",
-          "quantity": 10,
-          "cost": 14.99
-        },
-        {
-          "name": "salvou aqui",
-          "quantity": 10,
-          "cost": 5
+          "amount": 113.82,
+          "date": "2024-09-17T18:55:30.426Z"
         }
       ]
     },
     {
-      "id": "2",
-      "name": "Luigie Mushroom",
-      "quantity": 10,
-      "cost": 7.54
+      "id": "994d",
+      "name": "Botão de Treechnid das Sombras",
+      "cost": [
+        {
+          "amount": 2299.98,
+          "date": "2024-09-17T19:09:52.757Z"
+        }
+      ]
     },
     {
-      "id": "3",
-      "name": "Soft Oak Bark",
-      "quantity": 10,
-      "cost": "3"
+      "id": "f981",
+      "name": "Casca de Treechnid Ancestral",
+      "cost": [
+        {
+          "amount": 22.22,
+          "date": "2024-09-17T19:11:59.438Z"
+        }
+      ]
     },
     {
-      "id": "4",
-      "name": "Soft Oak Root",
-      "quantity": 10,
-      "cost": 4
+      "id": "b36a",
+      "name": "Raiz de Treechnid Ancestral",
+      "cost": [
+        {
+          "amount": 1890,
+          "date": "2024-09-17T19:17:58.198Z"
+        }
+      ]
     },
     {
-      "id": "5",
-      "name": "Soft Oak Amber",
-      "quantity": 2,
-      "cost": 12
+      "id": "637d",
+      "name": "Raiz de Treechnid das Sombras",
+      "cost": [
+        {
+          "amount": 54.99,
+          "date": "2024-09-17T19:14:34.377Z"
+        }
+      ]
     },
     {
-      "id": "6",
-      "name": "Ancestral Treechelmet",
-      "quantity": 1,
-      "cost": 100
+      "id": "91fc",
+      "name": "Treecapacete",
+      "cost": [
+        {
+          "amount": 10900,
+          "date": "2024-09-17T19:16:31.291Z"
+        }
+      ]
     },
     {
-      "id": "7",
-      "name": "Soft Oak Bud",
-      "quantity": 1,
-      "cost": 20
+      "id": "98f8",
+      "name": "Âmbar Ancestral",
+      "cost": [
+        {
+          "amount": 299.99,
+          "date": "2024-09-17T19:21:36.209Z"
+        }
+      ]
     },
     {
-      "id": "8",
-      "name": "Treechelmet",
-      "quantity": 1,
-      "cost": 80
+      "id": "ab39",
+      "name": "Cogumelo Luidegît",
+      "cost": [
+        {
+          "amount": 579.99,
+          "date": "2024-09-17T20:14:38.196Z"
+        }
+      ]
     },
     {
-      "id": "9",
-      "name": "Royal Mushroom",
-      "quantity": 5,
-      "cost": 10
+      "id": "406b",
+      "name": "Raiz de Carvalho Mole",
+      "cost": [
+        {
+          "amount": 13.99,
+          "date": "2024-09-17T20:15:15.867Z"
+        }
+      ]
     },
     {
-      "id": "10",
-      "name": "Golden Leaf",
-      "quantity": 3,
-      "cost": 25
+      "id": "9e92",
+      "name": "Casca de Carvalho Mole",
+      "cost": [
+        {
+          "amount": 6.77,
+          "date": "2024-09-17T20:15:34.029Z"
+        }
+      ]
     },
     {
-      "id": "11",
-      "name": "Enchanted Wood",
-      "quantity": 2,
-      "cost": 45
+      "id": "e6c0",
+      "name": "Âmbar de Treechnid das Sombras",
+      "cost": [
+        {
+          "amount": 4997.77,
+          "date": "2024-09-17T20:16:31.261Z"
+        }
+      ]
     },
     {
-      "id": "12",
-      "name": "casca",
-      "quantity": 10,
-      "cost": 14.99
+      "id": "ccf7",
+      "name": "Âmbar de Carvalho Mole",
+      "cost": [
+        {
+          "amount": 17.99,
+          "date": "2024-09-17T20:16:53.668Z"
+        }
+      ]
     },
     {
-      "name": "quero que salve aqui",
-      "quantity": 10,
-      "cost": 5.01,
-      "id": "6403"
+      "id": "4690",
+      "name": "Broto de Carvalho Mole",
+      "cost": [
+        {
+          "amount": 37.76,
+          "date": "2024-09-17T20:17:44.720Z"
+        }
+      ]
     },
     {
-      "id": "55d6",
-      "name": "agora vai",
-      "quantity": 10,
-      "cost": 20
+      "id": "7911",
+      "name": "Treecapacete Ancestral",
+      "cost": [
+        {
+          "amount": 86000,
+          "date": "2024-09-17T20:18:18.155Z"
+        }
+      ]
     }
   ],
   "itens": [
     {
-      "id": "1",
+      "id": "1726601901040",
       "type": "Hat",
-      "name": "Enchanted Wood Hat",
-      "image": "/Dora.jpg",
-      "venda": 77,
-      "custo": 120,
-      "lucro": 80,
+      "name": "Treecapacete Ancestral",
+      "image": "Ancestral_Treechelmet.png",
+      "venda": 86001,
       "receita": [
         {
-          "name": "Dark Treechnid Amber",
-          "quantity": 10,
-          "cost": 20
+          "name": "Raiz Treechnid",
+          "quantity": 120,
+          "cost": [
+            {
+              "amount": 113.82,
+              "date": "2024-09-17T18:55:30.426Z"
+            }
+          ]
         },
         {
-          "name": "Luigie Mushroom",
-          "quantity": 10,
-          "cost": 7.54
+          "name": "Botão de Treechnid das Sombras",
+          "quantity": 20,
+          "cost": [
+            {
+              "amount": 2299.98,
+              "date": "2024-09-17T19:09:52.757Z"
+            }
+          ]
         },
         {
-          "name": "Soft Oak Bark",
-          "quantity": 10,
-          "cost": "3"
-        },
-        {
-          "name": "Soft Oak Root",
-          "quantity": 10,
-          "cost": 4
-        },
-        {
-          "name": "Soft Oak Amber",
-          "quantity": 2,
-          "cost": 12
-        },
-        {
-          "name": "Ancestral Treechelmet",
-          "quantity": 1,
-          "cost": 100
-        },
-        {
-          "name": "Soft Oak Bud",
-          "quantity": 1,
-          "cost": 20
-        },
-        {
-          "name": "Treechelmet",
-          "quantity": 1,
-          "cost": 80
-        },
-        {
-          "name": "Royal Mushroom",
-          "quantity": 5,
-          "cost": 10
-        },
-        {
-          "name": "Golden Leaf",
+          "name": "Casca de Treechnid Ancestral",
           "quantity": 3,
-          "cost": 25
+          "cost": [
+            {
+              "amount": 22.22,
+              "date": "2024-09-17T19:11:59.438Z"
+            }
+          ]
         },
         {
-          "name": "Enchanted Wood",
-          "quantity": 2,
-          "cost": 45
-        }
-      ]
-    },
-    {
-      "id": "2",
-      "type": "Hat",
-      "name": "Royal Crown",
-      "image": "/Dora.jpg",
-      "venda": 100,
-      "custo": 120,
-      "lucro": 80,
-      "receita": [
-        {
-          "name": "Royal Mushroom",
-          "quantity": 5,
-          "cost": 10
-        },
-        {
-          "name": "Golden Leaf",
+          "name": "Raiz de Treechnid Ancestral",
           "quantity": 3,
-          "cost": 25
+          "cost": [
+            {
+              "amount": 1890,
+              "date": "2024-09-17T19:17:58.198Z"
+            }
+          ]
         },
         {
-          "name": "Enchanted Wood",
+          "name": "Raiz de Treechnid das Sombras",
           "quantity": 2,
-          "cost": 45
+          "cost": [
+            {
+              "amount": 54.99,
+              "date": "2024-09-17T19:14:34.377Z"
+            }
+          ]
+        },
+        {
+          "name": "Treecapacete",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 10900,
+              "date": "2024-09-17T19:16:31.291Z"
+            }
+          ]
+        },
+        {
+          "name": "Âmbar Ancestral",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 299.99,
+              "date": "2024-09-17T19:21:36.209Z"
+            }
+          ]
         }
       ]
     },
     {
-      "id": "3",
+      "id": "1726602339146",
       "type": "Hat",
-      "name": "Soft Oak Hat",
-      "image": "/Dora.jpg",
-      "venda": 100,
+      "name": "Chapéu de Carvalho Mole",
+      "image": "Soft_Oak_Hat.png",
+      "venda": 179990,
       "receita": [
         {
-          "name": "casca",
+          "name": "Cogumelo Luidegît",
           "quantity": 10,
-          "cost": 14.99
-        }
-      ]
-    },
-    {
-      "id": "1725817851289",
-      "type": "hat",
-      "name": "teste 01",
-      "image": "/Dora.jpg",
-      "venda": 1,
-      "receita": [
+          "cost": [
+            {
+              "amount": 579.99,
+              "date": "2024-09-17T20:23:27.835Z"
+            }
+          ]
+        },
         {
-          "name": "agora vai",
+          "name": "Raiz de Carvalho Mole",
           "quantity": 10,
-          "cost": 10
+          "cost": [
+            {
+              "amount": 13.99,
+              "date": "2024-09-17T20:23:27.835Z"
+            }
+          ]
+        },
+        {
+          "name": "Casca de Carvalho Mole",
+          "quantity": 10,
+          "cost": [
+            {
+              "amount": 6.77,
+              "date": "2024-09-17T20:23:27.835Z"
+            }
+          ]
+        },
+        {
+          "name": "Âmbar de Treechnid das Sombras",
+          "quantity": 10,
+          "cost": [
+            {
+              "amount": 4997.77,
+              "date": "2024-09-17T20:23:27.835Z"
+            }
+          ]
+        },
+        {
+          "name": "Âmbar de Carvalho Mole",
+          "quantity": 2,
+          "cost": [
+            {
+              "amount": 17.99,
+              "date": "2024-09-17T20:23:27.835Z"
+            }
+          ]
+        },
+        {
+          "name": "Treecapacete",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 10900,
+              "date": "2024-09-17T20:23:27.835Z"
+            }
+          ]
+        },
+        {
+          "name": "Broto de Carvalho Mole",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 37.76,
+              "date": "2024-09-17T20:23:27.835Z"
+            }
+          ]
+        },
+        {
+          "name": "Treecapacete Ancestral",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 86000,
+              "date": "2024-09-17T20:23:27.835Z"
+            }
+          ]
         }
       ]
     }

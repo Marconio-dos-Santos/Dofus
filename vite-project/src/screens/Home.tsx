@@ -4,13 +4,19 @@ import ItensScreen from './itenScreen';
 import AddItemModal from './AddItemModal'; // Importa o modal
 import Receita from './receita';
 
-type Item = {
+type IngredientWithCostArray = {
+  name: string;
+  quantity: number;
+  cost: { amount: number; date: string }[];
+};
+
+type ItemWithCostArray = {
   id: number;
   type: string;
   name: string;
   image: string;
   venda: number;
-  receita: { name: string, quantity: number, cost: number }[];
+  receita: IngredientWithCostArray[];
 };
 
 // Define a interface para as props do Home
@@ -19,27 +25,47 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ setSelectedItemId }) => {
-  const [itens, setItens] = useState<Item[]>([]);
-  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  const [itens, setItens] = useState<ItemWithCostArray[]>([]);
+  const [selectedItem, setSelectedItem] = useState<ItemWithCostArray | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // Controla a visibilidade do modal
 
   useEffect(() => {
     axios.get('http://localhost:5000/itens')
       .then(response => {
-        setItens(response.data);
-        setSelectedItem(response.data[0]); // Seleciona o primeiro item por padrão
-        setSelectedItemId(response.data[0].id); // Define o ID do item selecionado
+        const updatedItens = response.data.map((item: ItemWithCostArray) => ({
+          ...item,
+          receita: item.receita.map(ingredient => ({
+            ...ingredient,
+            cost: [{ amount: ingredient.cost[ingredient.cost.length - 1]?.amount || 0, date: new Date().toISOString() }],
+          })),
+        }));
+        setItens(updatedItens);
+        setSelectedItem(updatedItens[0]);  // Set the first item by default
+        setSelectedItemId(updatedItens[0].id);  // Set the item ID
       })
       .catch(error => {
         console.error("Erro ao buscar itens:", error);
       });
   }, [setSelectedItemId]);
+  
+  
 
-  const handleItemClick = (item: Item) => {
-    setSelectedItem(item);
-    setSelectedItemId(item.id); // Atualiza o ID do item selecionado quando clicado
+  const handleItemClick = (item: ItemWithCostArray) => {
+    const updatedItem = {
+      ...item,
+      receita: item.receita.map(ingredient => ({
+        ...ingredient,
+        cost: ingredient.cost.map(c => ({
+          amount: c.amount,
+          date: c.date
+        }))
+      }))
+    };
+    setSelectedItem(updatedItem);
+    setSelectedItemId(item.id);
   };
-
+  
+  
   const handleItemAdded = () => {
     // Atualiza a lista de itens após adicionar um novo
     axios.get('http://localhost:5000/itens')
@@ -52,19 +78,20 @@ const Home: React.FC<HomeProps> = ({ setSelectedItemId }) => {
   };
 
   return (
-    <div className='hero-section'>
-      <div className='itens'>
+    <div className='container'>
+      <div className='left-section'>
         {selectedItem && <ItensScreen item={selectedItem} />}
-        {selectedItem && <Receita receita={selectedItem.receita} />}
+      </div>
+      <div className='right-section' >
+      {selectedItem && <Receita receita={selectedItem.receita} />}
       </div>
       <div className='item-selector'>
-        <ul>
-          {itens.map((item) => (
-            <li key={item.id} onClick={() => handleItemClick(item)}>
-              {item.name}
-            </li>
-          ))}
-        </ul>
+      {itens.map((item) => (
+  <a key={item.id} onClick={() => handleItemClick(item)}>
+    {item.name}
+  </a>
+))}
+
         <button onClick={() => setIsModalOpen(true)}>Adicionar Novo Item</button>
       </div>
 
