@@ -10,11 +10,21 @@ type Ingredient = {
     id: any;
     name: string;
     cost: CostHistory[];
+    quantity: number;
+};
+
+type Item = {
+    id: number;
+    type: string;
+    name: string;
+    receita: Ingredient[];
 };
 
 const ManageRecursos: React.FC = () => {
     const [recursosGlobais, setRecursosGlobais] = useState<Ingredient[]>([]);
     const [editedRecursos, setEditedRecursos] = useState<Ingredient[]>([]);
+    const [newCost, setNewCost] = useState<Map<number, number>>(new Map());
+    const [itens, setItens] = useState<Item[]>([]); // Estado para armazenar todos os itens
     const [message, setMessage] = useState<string | null>(null);
 
     useEffect(() => {
@@ -22,32 +32,32 @@ const ManageRecursos: React.FC = () => {
             .then(response => {
                 const recursosData = response.data;
                 setRecursosGlobais(recursosData);
-                setEditedRecursos(JSON.parse(JSON.stringify(recursosData)));  // Clone resources for editing
+                setEditedRecursos(JSON.parse(JSON.stringify(recursosData)));
             })
             .catch(error => {
                 console.error('Erro ao buscar recursos globais:', error);
             });
+            axios.get('http://localhost:5000/itens')
+            .then(response => {
+                setItens(response.data); // Armazena todos os itens
+            })
+            .catch(error => {
+                console.error('Erro ao buscar itens:', error);
+            });
     }, []);
 
-    // Handle input changes, but only modify `editedRecursos`
     const handleInputChange = (index: number, field: 'name' | 'cost', value: string | number) => {
         const updatedRecursos = [...editedRecursos];
-        if (field === 'cost') {
-            updatedRecursos[index] = {
-                ...updatedRecursos[index],
-                cost: [...updatedRecursos[index].cost, { amount: value as number, date: new Date().toISOString() }]
-            };
-        } else {
-            updatedRecursos[index] = { ...updatedRecursos[index], name: value as string };
+        if (field === 'name') {
+            updatedRecursos[index].name = value as string;
+            setEditedRecursos(updatedRecursos);
+        } else if (field === 'cost') {
+            handleCostChange(index, parseFloat(value as string));
         }
-        setEditedRecursos(updatedRecursos);  // Only update the edited state
     };
 
-    // Inline cost editing for saved cost history
-    const handleCostEdit = (recursoIndex: number, costIndex: number, newAmount: number, newDate: string) => {
-        const updatedRecursos = [...editedRecursos];
-        updatedRecursos[recursoIndex].cost[costIndex] = { amount: newAmount, date: newDate };
-        setEditedRecursos(updatedRecursos);  // Update cost in the edited state
+    const handleCostChange = (index: number, value: number) => {
+        setNewCost(prevNewCost => new Map(prevNewCost).set(index, value));
     };
 
     const handleCostDelete = (recursoIndex: number, costIndex: number) => {
@@ -56,22 +66,57 @@ const ManageRecursos: React.FC = () => {
         setEditedRecursos(updatedRecursos);
     };
 
-    // Save only committed (edited) costs
-    const handleSave = () => {
-        setRecursosGlobais(editedRecursos);  // Update the main state
-        Promise.all(
-            editedRecursos.map(recurso =>
-                axios.put(`http://localhost:5000/recursos/${recurso.id}`, recurso)
-            )
-        )
-        .then(() => {
-            setMessage('Recursos globais atualizados com sucesso!');
-        })
-        .catch(error => {
-            console.error('Erro ao atualizar recursos globais:', error);
-            setMessage('Erro ao atualizar recursos globais.');
+    const handleSave = async () => {
+        const updatedRecursos = [...editedRecursos];
+      
+        // Apply new costs to the resources
+        newCost.forEach((amount, index) => {
+          if (amount) {
+            updatedRecursos[index].cost = [
+              ...updatedRecursos[index].cost,
+              { amount, date: new Date().toISOString() }
+            ];
+          }
         });
-    };
+      
+        setRecursosGlobais(updatedRecursos);
+      
+        try {
+          // First, update the resources
+          await Promise.all(
+            updatedRecursos.map(recurso =>
+              axios.put(`http://localhost:5000/recursos/${recurso.id}`, recurso)
+            )
+          );
+      
+          // Once resources are updated, synchronize the items with the updated resource data
+          const updatedItens = itens.map(item => {
+            const updatedReceita = item.receita.map((ingredient) => {
+              const matchingRecurso = updatedRecursos.find(recurso => recurso.name === ingredient.name);
+              if (matchingRecurso) {
+                return { ...ingredient, quantity: matchingRecurso.quantity, cost: matchingRecurso.cost };
+              }
+              return ingredient; // No changes if resource isn't found
+            });
+            return { ...item, receita: updatedReceita };
+          });
+      
+          // Update each item individually in the server
+          await Promise.all(
+            updatedItens.map(item =>
+              axios.put(`http://localhost:5000/itens/${item.id}`, item)
+            )
+          );
+      
+          setMessage('Recursos e itens atualizados com sucesso!');
+          setNewCost(new Map());  // Clear new costs after successful save
+      
+        } catch (error) {
+          console.error('Erro ao atualizar recursos e itens:', error);
+          setMessage('Erro ao atualizar recursos e itens.');
+        }
+      };
+      
 
     return (
         <div className="global-resource-manager">
@@ -87,30 +132,29 @@ const ManageRecursos: React.FC = () => {
 
                     <input
                         type="number"
-                        value={editedRecursos[recursoIndex].cost[editedRecursos[recursoIndex].cost.length - 1]?.amount || 0} // Show the latest cost
-                        onChange={(e) => handleInputChange(recursoIndex, 'cost', parseFloat(e.target.value))}
+                        placeholder="Novo custo"
+                        value={newCost.get(recursoIndex) || ''}
+                        onChange={(e) => handleInputChange(recursoIndex, 'cost', e.target.value)}
                         step="0.01"
                         style={{ width: '80px', marginLeft: '10px' }}
                     />
                     <span className="currency">R$</span>
 
-                    {/* Cost History with Date, Edit/Delete */}
                     <div className="cost-history">
                         <p>Histórico de custos:</p>
                         <ul>
                             {recursosGlobais[recursoIndex].cost.map((c, costIndex) => (
                                 <li key={costIndex}>
-                                    {/* Display only saved cost records */}
                                     <input
                                         type="number"
                                         value={c.amount}
-                                        onChange={(e) => handleCostEdit(recursoIndex, costIndex, parseFloat(e.target.value), c.date)}
+                                        readOnly
                                         style={{ width: '80px' }}
                                     />
                                     <input
                                         type="date"
-                                        value={c.date ? c.date.split('T')[0] : new Date().toISOString().split('T')[0]} // Fallback to the current date
-                                        onChange={(e) => handleCostEdit(recursoIndex, costIndex, c.amount, e.target.value)}
+                                        value={c.date.split('T')[0]}
+                                        readOnly
                                         style={{ marginLeft: '10px' }}
                                     />
                                     <button onClick={() => handleCostDelete(recursoIndex, costIndex)}>Deletar</button>

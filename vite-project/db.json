@@ -310,5 +310,254 @@
         }
       ]
     }
+  ],
+  "loja": [
+    {
+      "id": "1726601901040",
+      "type": "Hat",
+      "name": "Treecapacete Ancestral",
+      "image": "Ancestral_Treechelmet.png",
+      "venda": 86001,
+      "receita": [
+        {
+          "name": "Raiz Treechnid",
+          "quantity": 120,
+          "cost": [
+            {
+              "amount": 113.82,
+              "date": "2024-09-17T21:11:13.279Z"
+            }
+          ]
+        },
+        {
+          "name": "Botão de Treechnid das Sombras",
+          "quantity": 20,
+          "cost": [
+            {
+              "amount": 2299.98,
+              "date": "2024-09-17T21:11:13.279Z"
+            }
+          ]
+        },
+        {
+          "name": "Casca de Treechnid Ancestral",
+          "quantity": 3,
+          "cost": [
+            {
+              "amount": 22.22,
+              "date": "2024-09-17T21:11:13.279Z"
+            }
+          ]
+        },
+        {
+          "name": "Raiz de Treechnid Ancestral",
+          "quantity": 3,
+          "cost": [
+            {
+              "amount": 1890,
+              "date": "2024-09-17T21:11:13.279Z"
+            }
+          ]
+        },
+        {
+          "name": "Raiz de Treechnid das Sombras",
+          "quantity": 2,
+          "cost": [
+            {
+              "amount": 54.99,
+              "date": "2024-09-17T21:11:13.279Z"
+            }
+          ]
+        },
+        {
+          "name": "Treecapacete",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 10900,
+              "date": "2024-09-17T21:11:13.279Z"
+            }
+          ]
+        },
+        {
+          "name": "Âmbar Ancestral",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 299.99,
+              "date": "2024-09-17T21:11:13.279Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1726602339146",
+      "type": "Hat",
+      "name": "Chapéu de Carvalho Mole",
+      "image": "Soft_Oak_Hat.png",
+      "venda": 179990,
+      "receita": [
+        {
+          "name": "Cogumelo Luidegît",
+          "quantity": 10,
+          "cost": [
+            {
+              "amount": 579.99,
+              "date": "2024-09-18T17:21:01.536Z"
+            }
+          ]
+        },
+        {
+          "name": "Raiz de Carvalho Mole",
+          "quantity": 10,
+          "cost": [
+            {
+              "amount": 13.99,
+              "date": "2024-09-18T17:21:01.536Z"
+            }
+          ]
+        },
+        {
+          "name": "Casca de Carvalho Mole",
+          "quantity": 10,
+          "cost": [
+            {
+              "amount": 6.77,
+              "date": "2024-09-18T17:21:01.536Z"
+            }
+          ]
+        },
+        {
+          "name": "Âmbar de Treechnid das Sombras",
+          "quantity": 10,
+          "cost": [
+            {
+              "amount": 4997.77,
+              "date": "2024-09-18T17:21:01.536Z"
+            }
+          ]
+        },
+        {
+          "name": "Âmbar de Carvalho Mole",
+          "quantity": 2,
+          "cost": [
+            {
+              "amount": 17.99,
+              "date": "2024-09-18T17:21:01.536Z"
+            }
+          ]
+        },
+        {
+          "name": "Treecapacete",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 10900,
+              "date": "2024-09-18T17:21:01.536Z"
+            }
+          ]
+        },
+        {
+          "name": "Broto de Carvalho Mole",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 37.76,
+              "date": "2024-09-18T17:21:01.536Z"
+            }
+          ]
+        },
+        {
+          "name": "Treecapacete Ancestral",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 86000,
+              "date": "2024-09-18T17:21:01.536Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1726601901040",
+      "type": "Hat",
+      "name": "Treecapacete Ancestral",
+      "image": "Ancestral_Treechelmet.png",
+      "venda": 86000,
+      "receita": [
+        {
+          "name": "Raiz Treechnid",
+          "quantity": 120,
+          "cost": [
+            {
+              "amount": 113.82,
+              "date": "2024-09-18T17:42:11.131Z"
+            }
+          ]
+        },
+        {
+          "name": "Botão de Treechnid das Sombras",
+          "quantity": 20,
+          "cost": [
+            {
+              "amount": 2299.98,
+              "date": "2024-09-18T17:42:11.131Z"
+            }
+          ]
+        },
+        {
+          "name": "Casca de Treechnid Ancestral",
+          "quantity": 3,
+          "cost": [
+            {
+              "amount": 22.22,
+              "date": "2024-09-18T17:42:11.131Z"
+            }
+          ]
+        },
+        {
+          "name": "Raiz de Treechnid Ancestral",
+          "quantity": 3,
+          "cost": [
+            {
+              "amount": 1890,
+              "date": "2024-09-18T17:42:11.131Z"
+            }
+          ]
+        },
+        {
+          "name": "Raiz de Treechnid das Sombras",
+          "quantity": 2,
+          "cost": [
+            {
+              "amount": 54.99,
+              "date": "2024-09-18T17:42:11.131Z"
+            }
+          ]
+        },
+        {
+          "name": "Treecapacete",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 10900,
+              "date": "2024-09-18T17:42:11.131Z"
+            }
+          ]
+        },
+        {
+          "name": "Âmbar Ancestral",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 299.99,
+              "date": "2024-09-18T17:42:11.131Z"
+            }
+          ]
+        }
+      ]
+    }
   ]
 }

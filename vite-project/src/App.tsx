@@ -8,9 +8,10 @@ import {
 
 import './App.css';
 import Home from "./screens/Home";
-import AddRecursos from './screens/AddRecursos'; // Importa o novo componente
+import AddRecursos from './screens/AddRecursos'; 
+import ManageRecursos from './screens/ManageRecursos';
+import LojaScreen from './screens/LojaScreen'; // Importa a nova página da loja
 import React from "react";
-import ManageRecursos from './screens/ManageRecursos'; // Importa o novo componente de gerenciamento de recursos
 
 function Navigation({ }: { selectedItemId: number | null }) {
   const location = useLocation();
@@ -20,12 +21,14 @@ function Navigation({ }: { selectedItemId: number | null }) {
         <a className={location.pathname === "/home" ? "active" : ""}>
           <Link to="/home">Home</Link>
         </a>
-
-          <a className={location.pathname === "/manage-recursos" ? "active" : ""}>
-          <Link to="/manage-recursos">Gerenciar Recursos Globais</Link> {/* Novo link */}
+        <a className={location.pathname === "/manage-recursos" ? "active" : ""}>
+          <Link to="/manage-recursos">Gerenciar Recursos Globais</Link> 
         </a>
         <a className={location.pathname === "/add-recursos" ? "active" : ""}>
-          <Link to="/add-recursos">Adicionar Recurso</Link> {/* Novo link para adicionar recurso */}
+          <Link to="/add-recursos">Adicionar Recurso</Link> 
+        </a>
+        <a className={location.pathname === "/loja" ? "active" : ""}>
+          <Link to="/loja">Loja</Link> {/* Novo link para acessar a loja */}
         </a>
     </nav>
   );
@@ -38,9 +41,10 @@ function App() {
       <Router>
       <Navigation selectedItemId={selectedItemId} />
         <Routes>
-        <Route path="/home" element={<Home setSelectedItemId={setSelectedItemId} />} /> {/* Passa a função para Home */}
-          <Route path="/add-recursos" element={<AddRecursos />} /> {/* Nova rota para adicionar recurso */}
-          <Route path="/manage-recursos" element={<ManageRecursos />} /> {/* Nova rota para gerenciar recursos globais */}
+          <Route path="/home" element={<Home setSelectedItemId={setSelectedItemId} />} /> 
+          <Route path="/add-recursos" element={<AddRecursos />} /> 
+          <Route path="/manage-recursos" element={<ManageRecursos />} /> 
+          <Route path="/loja" element={<LojaScreen />} /> {/* Nova rota para acessar a loja */}
         </Routes>
       </Router>
     </>
@@ -48,4 +52,3 @@ function App() {
 }
 
 export default App;
-
