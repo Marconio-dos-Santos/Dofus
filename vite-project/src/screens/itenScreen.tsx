@@ -7,54 +7,59 @@ type IngredientWithCostNumber = {
     cost: { amount: number; date: string }[];
 };
   
-  type ItemWithCostNumber = {
+type ItemWithCostNumber = {
     id: number;
     type: string;
     name: string;
     image: string;
     venda: number;
     receita: IngredientWithCostNumber[];
-  };
+};
   
 
 const ItensScreen: React.FC<{ item: ItemWithCostNumber }> = ({ item }) => {
-    const [venda, setVenda] = useState<number>(item.venda); // Estado para armazenar o valor de venda editável
-    const [totalCost, setTotalCost] = useState<number>(0); // Estado para o custo total
+    const [venda, setVenda] = useState<number>(item.venda);
+    const [totalCost, setTotalCost] = useState<number>(0);
 
     const formatNumber = (amount: number) => {
         return new Intl.NumberFormat('pt-BR').format(amount);
-      };
+    };
 
-    // Recalcular o custo total da receita sempre que a receita do item mudar
     useEffect(() => {
         const calculateTotalCost = () => {
             const cost = item.receita.reduce((total, ingredient) => {
                 const latestCost = ingredient.cost[ingredient.cost.length - 1]?.amount || 0;
-                return total + latestCost * ingredient.quantity
+                return total + latestCost * ingredient.quantity;
             }, 0);
             setTotalCost(cost);
         };
 
-        calculateTotalCost(); // Calcula o custo total quando o componente é montado ou atualizado
-    }, [item.receita]); // Dependência é a receita do item
+        calculateTotalCost();
+    }, [item.receita]);
 
-    // Calcular o lucro (venda - custo total)
     const lucro = item.venda - totalCost;
 
-    // Função para salvar a nova venda no json-server
     const handleSave = () => {
-        // Atualiza o item com o novo valor de venda
         const updatedItem = { ...item, venda };
 
-        // Envia a requisição PUT para salvar a venda no json-server
         axios.put(`http://localhost:5000/itens/${item.id}`, updatedItem)
-            .then(() => {
-                alert("Valor de venda atualizado com sucesso!");
-            })
-            .catch(error => {
-                console.error("Erro ao salvar o valor de venda:", error);
-            });
+            .then(() => alert("Valor de venda atualizado com sucesso!"))
+            .catch(error => console.error("Erro ao salvar o valor de venda:", error));
     };
+
+    // New function to save the item to the store
+    const handleSaveToLoja = () => {
+        const itemToSave = { ...item, venda, receita: item.receita };
+      
+        axios.post('http://localhost:5000/loja', itemToSave)
+          .then(() => {
+            alert("Item saved to loja successfully!");
+          })
+          .catch(error => {
+            console.error("Error saving item to loja:", error);
+          });
+      };
+      
 
     return (
         <div className='iten'>
@@ -64,18 +69,21 @@ const ItensScreen: React.FC<{ item: ItemWithCostNumber }> = ({ item }) => {
                 <img src={item.image} alt={item.name} />
                 
                 <p>
-                    Venda: 
+                    Venda: {item.venda}
                     <input 
                         type="number"
-                        value={item.venda} // Controlado pelo estado de venda
+                        value={venda } 
                         onChange={(e) => setVenda(parseFloat(e.target.value))}
                         style={{ width: '80px', marginLeft: '10px' }}
                     /> - K
                 </p>
                 
-                <p>Custo Total: K : {formatNumber(totalCost)}</p>
-                <p>Lucro: K : {formatNumber(lucro)}</p>
+                <p>Custo Total: K {formatNumber(totalCost)}</p>
+                <p>Lucro: K {formatNumber(lucro)}</p>
                 <button onClick={handleSave}>Salvar</button>
+
+                {/* Button to save the item to the store */}
+                <button onClick={handleSaveToLoja} style={{ marginTop: '10px' }}>Salvar na Loja</button>
             </div>
         </div>
     );
