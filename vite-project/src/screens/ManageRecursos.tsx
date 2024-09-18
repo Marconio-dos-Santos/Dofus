@@ -26,7 +26,7 @@ const ManageRecursos: React.FC = () => {
     const [newCost, setNewCost] = useState<Map<number, number>>(new Map());
     const [itens, setItens] = useState<Item[]>([]);
     const [message, setMessage] = useState<string | null>(null);
-    const [searchTerm, setSearchTerm] = useState<string>(''); // Estado para busca
+    const [searchTerm, setSearchTerm] = useState<string>('');
 
     useEffect(() => {
         // Fetching global resources
@@ -70,18 +70,34 @@ const ManageRecursos: React.FC = () => {
         setEditedRecursos(updatedRecursos);
     };
 
-    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(event.target.value);
-    };
+    const synchronizeItemsWithGlobalRecursos = () => {
+        const updatedItens = itens.map(item => {
+            const updatedReceita = item.receita.map((ingredient) => {
+                const matchingRecurso = recursosGlobais.find(recurso => recurso.name === ingredient.name);
+                if (matchingRecurso) {
+                    const latestCost = matchingRecurso.cost[matchingRecurso.cost.length - 1];
+                    return {
+                        ...ingredient,
+                        cost: matchingRecurso.cost,
+                        quantity: ingredient.quantity
+                    };
+                }
+                return ingredient;
+            });
+            return { ...item, receita: updatedReceita };
+        });
 
-    const filteredRecursos = recursosGlobais.filter(recurso => 
-        recurso.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+        updatedItens.forEach(item => {
+            axios.put(`http://localhost:5000/itens/${item.id}`, item)
+                .catch(error => {
+                    console.error(`Erro ao atualizar item ${item.id}:`, error);
+                });
+        });
+    };
 
     const handleSave = () => {
         const updatedRecursos = [...editedRecursos];
 
-        // Update costs
         newCost.forEach((amount, index) => {
             if (amount) {
                 updatedRecursos[index].cost = [
@@ -93,7 +109,6 @@ const ManageRecursos: React.FC = () => {
 
         setRecursosGlobais(updatedRecursos);
 
-        // Save resources
         Promise.all(
             updatedRecursos.map(recurso =>
                 axios.put(`http://localhost:5000/recursos/${recurso.id}`, recurso)
@@ -101,7 +116,8 @@ const ManageRecursos: React.FC = () => {
         )
         .then(() => {
             setMessage('Recursos globais atualizados com sucesso!');
-            setNewCost(new Map());  // Clear new costs after successful save
+            setNewCost(new Map());
+            synchronizeItemsWithGlobalRecursos();
         })
         .catch(error => {
             console.error('Erro ao atualizar recursos globais:', error);
@@ -122,15 +138,19 @@ const ManageRecursos: React.FC = () => {
         return { min, max, average };
     };
 
+    const filteredRecursos = recursosGlobais.filter(recurso =>
+        recurso.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
         <div className="global-resource-manager">
             <h2>Gerenciar Recursos Globais</h2>
-            <input 
-                type="text" 
-                placeholder="Buscar recursos..." 
-                value={searchTerm} 
-                onChange={handleSearchChange} 
-                style={{ marginBottom: '20px' }} 
+            <input
+                type="text"
+                placeholder="Buscar recurso"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                style={{ marginBottom: '20px', padding: '5px', width: '200px' }}
             />
             {filteredRecursos.map((recurso, recursoIndex) => {
                 const { min, max, average } = calculateCostStatistics(recurso.cost);
