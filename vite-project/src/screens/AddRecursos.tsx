@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 type CostHistory = {
@@ -8,18 +8,25 @@ type CostHistory = {
 
 type Ingredient = {
     name: string;
-    cost: CostHistory[]; // Updated cost structure
+    cost: CostHistory[];
 };
 
 const AddRecursos: React.FC = () => {
     const [newIngredient, setNewIngredient] = useState<Ingredient>({
         name: '',
-        cost: [], // Initialize as an empty array
+        cost: [],
     });
-    const [newCost, setNewCost] = useState<number>(0); // Separate state for the new cost amount
+    const [newCost, setNewCost] = useState<number>(0);
+    const [existingResources, setExistingResources] = useState<Ingredient[]>([]);
     const [message, setMessage] = useState<string | null>(null);
 
-    // Function to handle input changes
+    // Fetch existing resources
+    useEffect(() => {
+        axios.get('http://localhost:5000/recursos')
+            .then(response => setExistingResources(response.data))
+            .catch(error => console.error('Erro ao buscar recursos:', error));
+    }, []);
+
     const handleInputChange = (field: 'name' | 'cost', value: string | number) => {
         if (field === 'name') {
             setNewIngredient((prevIngredient) => ({
@@ -27,28 +34,37 @@ const AddRecursos: React.FC = () => {
                 name: value as string,
             }));
         } else {
-            setNewCost(value as number); // Update the cost state separately
+            setNewCost(value as number);
         }
     };
 
-    // Function to add the ingredient to the global list
     const handleAddIngredient = () => {
+        // Check if the resource name already exists
+        const exists = existingResources.some(
+            (resource) => resource.name.toLowerCase() === newIngredient.name.toLowerCase()
+        );
+
+        if (exists) {
+            setMessage('Recurso já existe!');
+            return;
+        }
+
         const newCostEntry: CostHistory = {
             amount: newCost,
-            date: new Date().toISOString(), // Set the current date and time
+            date: new Date().toISOString(),
         };
 
         const ingredientWithCost: Ingredient = {
             ...newIngredient,
-            cost: [...newIngredient.cost, newCostEntry], // Add the cost with amount and date
+            cost: [...newIngredient.cost, newCostEntry],
         };
 
-        // Add the new resource to the database
         axios.post('http://localhost:5000/recursos', ingredientWithCost)
             .then(() => {
                 setMessage('Recurso adicionado com sucesso!');
-                setNewIngredient({ name: '', cost: [] }); // Reset the input fields
-                setNewCost(0); // Reset the cost
+                setNewIngredient({ name: '', cost: [] });
+                setNewCost(0);
+                setExistingResources([...existingResources, ingredientWithCost]);
             })
             .catch((error) => {
                 console.error('Erro ao adicionar recurso:', error);
@@ -83,7 +99,6 @@ const AddRecursos: React.FC = () => {
 
             <button onClick={handleAddIngredient}>Adicionar Recurso</button>
 
-            {/* Display success or error message */}
             {message && <p>{message}</p>}
         </div>
     );
