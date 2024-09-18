@@ -19,6 +19,7 @@ type Item = {
   image: string;
   venda: number;
   receita: Ingredient[];
+  status: string; // Adicionando status
 };
 
 const LojaScreen: React.FC = () => {
@@ -45,6 +46,7 @@ const LojaScreen: React.FC = () => {
     }, 0);
   };
 
+
   const calculateProfit = (venda: number, totalCost: number) => {
     return venda - totalCost;
   };
@@ -52,6 +54,22 @@ const LojaScreen: React.FC = () => {
   const calculateProfitPercentage = (venda: number, totalCost: number) => {
     if (totalCost === 0) return 0; // Avoid division by zero
     return (calculateProfit(venda, totalCost) / totalCost) * 100;
+  };
+
+  const toggleStatus = (item: Item) => {
+    const updatedStatus = item.status === 'vendido' ? 'na loja' : 'vendido';
+    
+    // Atualiza o status localmente
+    const updatedItems = lojaItens.map(i => 
+      i.id === item.id ? { ...i, status: updatedStatus } : i
+    );
+    setLojaItens(updatedItems);
+
+    // Atualiza no banco de dados
+    axios.put(`http://localhost:5000/loja/${item.id}`, { ...item, status: updatedStatus })
+      .catch(error => {
+        console.error("Erro ao atualizar o status do item:", error);
+      });
   };
 
   return (
@@ -81,6 +99,12 @@ const LojaScreen: React.FC = () => {
               <div className="profit-info">
                 <span><strong>Lucro: K: {formatNumber(lucro)}</strong></span>
                 <span><strong> -- {formatNumber(lucroPercentage)}%</strong></span>
+              </div>
+              <div>
+                <strong>Status:</strong> {item.status}
+                <button onClick={() => toggleStatus(item)}>
+                  {item.status === 'vendido' ? 'Marcar como na loja' : 'Marcar como vendido'}
+                </button>
               </div>
             </li>
           );
