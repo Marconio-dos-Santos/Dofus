@@ -5,8 +5,8 @@
       "name": "Raiz Treechnid",
       "cost": [
         {
-          "amount": 113.82,
-          "date": "2024-09-18T19:32:14.418Z"
+          "amount": 113.83,
+          "date": "2024-09-18T19:44:55.686Z"
         }
       ]
     },
@@ -147,15 +147,15 @@
       "type": "Hat",
       "name": "Treecapacete Ancestral",
       "image": "Ancestral_Treechelmet.png",
-      "venda": 86001,
+      "venda": 90000,
       "receita": [
         {
           "name": "Raiz Treechnid",
           "quantity": 120,
           "cost": [
             {
-              "amount": 113.82,
-              "date": "2024-09-18T19:32:14.418Z"
+              "amount": 113.83,
+              "date": "2024-09-18T19:51:11.806Z"
             }
           ]
         },
@@ -165,7 +165,7 @@
           "cost": [
             {
               "amount": 2299.98,
-              "date": "2024-09-17T19:09:52.757Z"
+              "date": "2024-09-18T19:51:11.806Z"
             }
           ]
         },
@@ -175,7 +175,7 @@
           "cost": [
             {
               "amount": 22.22,
-              "date": "2024-09-17T19:11:59.438Z"
+              "date": "2024-09-18T19:51:11.806Z"
             }
           ]
         },
@@ -185,7 +185,7 @@
           "cost": [
             {
               "amount": 1890,
-              "date": "2024-09-17T19:17:58.198Z"
+              "date": "2024-09-18T19:51:11.806Z"
             }
           ]
         },
@@ -195,7 +195,7 @@
           "cost": [
             {
               "amount": 54.99,
-              "date": "2024-09-17T19:14:34.377Z"
+              "date": "2024-09-18T19:51:11.806Z"
             }
           ]
         },
@@ -205,7 +205,7 @@
           "cost": [
             {
               "amount": 10900,
-              "date": "2024-09-17T19:16:31.291Z"
+              "date": "2024-09-18T19:51:11.806Z"
             }
           ]
         },
@@ -215,7 +215,7 @@
           "cost": [
             {
               "amount": 299.99,
-              "date": "2024-09-17T19:21:36.209Z"
+              "date": "2024-09-18T19:51:11.806Z"
             }
           ]
         }
@@ -554,6 +554,85 @@
             {
               "amount": 299.99,
               "date": "2024-09-18T17:42:11.131Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1726601901040",
+      "type": "Hat",
+      "name": "Treecapacete Ancestral",
+      "image": "Ancestral_Treechelmet.png",
+      "venda": 90000,
+      "receita": [
+        {
+          "name": "Raiz Treechnid",
+          "quantity": 120,
+          "cost": [
+            {
+              "amount": 113.83,
+              "date": "2024-09-18T19:51:11.806Z"
+            }
+          ]
+        },
+        {
+          "name": "Botão de Treechnid das Sombras",
+          "quantity": 20,
+          "cost": [
+            {
+              "amount": 2299.98,
+              "date": "2024-09-18T19:51:11.806Z"
+            }
+          ]
+        },
+        {
+          "name": "Casca de Treechnid Ancestral",
+          "quantity": 3,
+          "cost": [
+            {
+              "amount": 22.22,
+              "date": "2024-09-18T19:51:11.806Z"
+            }
+          ]
+        },
+        {
+          "name": "Raiz de Treechnid Ancestral",
+          "quantity": 3,
+          "cost": [
+            {
+              "amount": 1890,
+              "date": "2024-09-18T19:51:11.806Z"
+            }
+          ]
+        },
+        {
+          "name": "Raiz de Treechnid das Sombras",
+          "quantity": 2,
+          "cost": [
+            {
+              "amount": 54.99,
+              "date": "2024-09-18T19:51:11.806Z"
+            }
+          ]
+        },
+        {
+          "name": "Treecapacete",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 10900,
+              "date": "2024-09-18T19:51:11.806Z"
+            }
+          ]
+        },
+        {
+          "name": "Âmbar Ancestral",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 299.99,
+              "date": "2024-09-18T19:51:11.806Z"
             }
           ]
         }

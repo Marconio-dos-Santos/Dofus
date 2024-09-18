@@ -288,6 +288,73 @@ input {
     color: #666;
 }
 
+/* LojaScreen.css */
+.loja-container {
+    padding: 20px;
+    background-color: #2e2c27;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #ffffff;
+    text-align: center;
+}
+
+.item-list {
+    list-style: none;
+    padding: 0;
+}
+
+.item {
+    background-color: #c9bf9d;
+    border: 1px solid #918a76;
+    border-radius: 5px;
+    margin: 15px 0;
+    padding: 15px;
+    transition: box-shadow 0.3s ease;
+}
+
+.item:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.item h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #0056b3;
+}
+
+.item p {
+    margin: 5px 0;
+}
+
+.item img {
+    border-radius: 5px;
+}
+
+.receita-title {
+    font-weight: bold;
+    margin: 10px 0 5px;
+}
+
+.receita-list {
+    list-style: none;
+    padding: 0;
+}
+
+.receita-list li {
+    margin: 5px 0;
+}
+
+strong {
+    color: #d9534f; /* Bootstrap's danger color */
+}
+
+.profit-info {
+    margin-top: 10px;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .container {

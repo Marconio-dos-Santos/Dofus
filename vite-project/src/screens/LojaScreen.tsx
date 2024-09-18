@@ -26,7 +26,8 @@ const LojaScreen: React.FC = () => {
 
   const formatNumber = (amount: number) => {
     return new Intl.NumberFormat('pt-BR').format(amount);
-};
+  };
+
   useEffect(() => {
     axios.get('http://localhost:5000/loja')
       .then(response => {
@@ -54,35 +55,33 @@ const LojaScreen: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="loja-container">
       <h2>Loja Itens</h2>
-      <ul>
+      <ul className="item-list">
         {lojaItens.map(item => {
           const totalCost = calculateTotalCost(item.receita);
           const lucro = calculateProfit(item.venda, totalCost);
           const lucroPercentage = calculateProfitPercentage(item.venda, totalCost);
 
-
           return (
-            <li key={item.id}>
-    
-              <h3>{item.id}</h3>
+            <li key={item.id} className="item">
+              <h3>{item.name}</h3>
               <p>Type: {item.type}</p>
-              
               <img src={item.image} alt={item.name} style={{ width: '100px' }} />
-              <h4>Receita:</h4>
-              <ul>
-
+              <h4 className="receita-title">Receita:</h4>
+              <ul className="receita-list">
                 {item.receita.map((ingredient, index) => (
                   <li key={index}>
-                    {ingredient.quantity}x {ingredient.name} - Custo: K: {ingredient.cost[0].amount}
+                    {ingredient.quantity}x {ingredient.name} - Custo: K: {formatNumber(ingredient.cost[0].amount)}
                   </li>
                 ))}
               </ul>
               <p><strong>Custo Total: K: {formatNumber(totalCost)}</strong></p>
-              <p><strong>Venda: K: {formatNumber(item.venda)}</strong></p> {/* Ensure unique venda value */}
-              <span><strong>Lucro: K: {formatNumber(lucro)}   </strong></span>
-              <span><strong> -- {formatNumber(lucroPercentage)}% </strong></span>
+              <p><strong>Venda: K: {formatNumber(item.venda)}</strong></p>
+              <div className="profit-info">
+                <span><strong>Lucro: K: {formatNumber(lucro)}</strong></span>
+                <span><strong> -- {formatNumber(lucroPercentage)}%</strong></span>
+              </div>
             </li>
           );
         })}
