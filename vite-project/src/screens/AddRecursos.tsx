@@ -9,12 +9,14 @@ type CostHistory = {
 type Ingredient = {
     name: string;
     cost: CostHistory[];
+    type: string; // Add the type field
 };
 
 const AddRecursos: React.FC = () => {
     const [newIngredient, setNewIngredient] = useState<Ingredient>({
         name: '',
         cost: [],
+        type: '', // Initialize with an empty string for type
     });
     const [newCost, setNewCost] = useState<number>(0);
     const [existingResources, setExistingResources] = useState<Ingredient[]>([]);
@@ -27,19 +29,23 @@ const AddRecursos: React.FC = () => {
             .catch(error => console.error('Erro ao buscar recursos:', error));
     }, []);
 
-    const handleInputChange = (field: 'name' | 'cost', value: string | number) => {
+    const handleInputChange = (field: 'name' | 'cost' | 'type', value: string | number) => {
         if (field === 'name') {
             setNewIngredient((prevIngredient) => ({
                 ...prevIngredient,
                 name: value as string,
             }));
-        } else {
+        } else if (field === 'cost') {
             setNewCost(value as number);
+        } else {
+            setNewIngredient((prevIngredient) => ({
+                ...prevIngredient,
+                type: value as string, // Update the type field
+            }));
         }
     };
 
     const handleAddIngredient = () => {
-        // Check if the resource name already exists
         const exists = existingResources.some(
             (resource) => resource.name.toLowerCase() === newIngredient.name.toLowerCase()
         );
@@ -62,7 +68,7 @@ const AddRecursos: React.FC = () => {
         axios.post('http://localhost:5000/recursos', ingredientWithCost)
             .then(() => {
                 setMessage('Recurso adicionado com sucesso!');
-                setNewIngredient({ name: '', cost: [] });
+                setNewIngredient({ name: '', cost: [], type: '' });
                 setNewCost(0);
                 setExistingResources([...existingResources, ingredientWithCost]);
             })
@@ -84,6 +90,27 @@ const AddRecursos: React.FC = () => {
                     onChange={(e) => handleInputChange('name', e.target.value)}
                     placeholder="Nome do recurso"
                 />
+            </div>
+
+            <div>
+                <label>Tipo do Recurso:</label>
+                <select
+                    value={newIngredient.type}
+                    onChange={(e) => handleInputChange('type', e.target.value)}
+                >
+                    <option value="">Selecione um tipo</option>
+                    <option value="raiz">Raiz</option>
+                    <option value="broto">Broto</option>
+                    <option value="âmbar">Âmbar</option>
+                    <option value="casca">Casca</option>
+                    <option value="recurso">Recurso</option>
+                    <option value="lã">Lã</option>
+                    <option value="couro">Couro</option>
+                    <option value="osso">Osso</option>
+                    <option value="perna">Perna</option>
+                    <option value="cauda">Cauda</option>
+                    <option value="tecido">Tecido</option>
+                </select>
             </div>
 
             <div>

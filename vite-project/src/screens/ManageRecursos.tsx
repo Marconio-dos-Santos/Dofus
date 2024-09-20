@@ -11,6 +11,7 @@ type Ingredient = {
     name: string;
     cost: CostHistory[];
     quantity: number;
+    type: string;  // Add type field to differentiate resources
 };
 
 type Item = {
@@ -27,6 +28,7 @@ const ManageRecursos: React.FC = () => {
     const [itens, setItens] = useState<Item[]>([]);
     const [message, setMessage] = useState<string | null>(null);
     const [searchTerm, setSearchTerm] = useState<string>('');
+    const [selectedType, setSelectedType] = useState<string>('');  // State for selected type
 
     useEffect(() => {
         // Fetching global resources
@@ -69,6 +71,10 @@ const ManageRecursos: React.FC = () => {
         updatedRecursos[recursoIndex].cost = updatedRecursos[recursoIndex].cost.filter((_, idx) => idx !== costIndex);
         setEditedRecursos(updatedRecursos);
     };
+
+    const filteredRecursos = recursosGlobais
+        .filter(recurso => recurso.name.toLowerCase().includes(searchTerm.toLowerCase()))  // Filter by name
+        .filter(recurso => selectedType === '' || recurso.type === selectedType);  // Filter by selected type
 
     const synchronizeItemsWithGlobalRecursos = () => {
         const updatedItens = itens.map(item => {
@@ -138,13 +144,11 @@ const ManageRecursos: React.FC = () => {
         return { min, max, average };
     };
 
-    const filteredRecursos = recursosGlobais.filter(recurso =>
-        recurso.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
     return (
         <div className="global-resource-manager">
             <h2>Gerenciar Recursos Globais</h2>
+
+            {/* Search by name */}
             <input
                 type="text"
                 placeholder="Buscar recurso"
@@ -152,27 +156,52 @@ const ManageRecursos: React.FC = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 style={{ marginBottom: '20px', padding: '5px', width: '200px' }}
             />
+
+            {/* Dropdown to filter by type */}
+            <select 
+                value={selectedType}
+                onChange={(e) => setSelectedType(e.target.value)}
+                style={{ marginBottom: '20px', padding: '5px' }}
+            >
+                <option value="">Todos os Tipos</option>
+                <option value="raiz">Raiz</option>
+                <option value="broto">Broto</option>
+                <option value="âmbar">Âmbar</option>
+                <option value="casca">Casca</option>
+                <option value="recurso">Recurso</option>
+                <option value="lã">Lã</option>
+                <option value="couro">Couro</option>
+                <option value="osso">Osso</option>
+                <option value="perna">Perna</option>
+                <option value="cauda">Cauda</option>
+                <option value="tecido">Tecido</option>
+            </select>
+
             {filteredRecursos.map((recurso, recursoIndex) => {
-                const { min, max, average } = calculateCostStatistics(recurso.cost);
+    const { min, max, average } = calculateCostStatistics(recurso.cost);
 
-                return (
-                    <div key={recurso.id} className="resource-row">
-                        <input
-                            type="text"
-                            value={editedRecursos[recursoIndex].name}
-                            onChange={(e) => handleInputChange(recursoIndex, 'name', e.target.value)}
-                            style={{ marginRight: '10px' }}
-                        />
+    const editedRecursoIndex = editedRecursos.findIndex(
+        (editedRecurso) => editedRecurso.id === recurso.id
+    );
 
-                        <input
-                            type="number"
-                            placeholder="Novo custo"
-                            value={newCost.get(recursoIndex) || ''}
-                            onChange={(e) => handleInputChange(recursoIndex, 'cost', e.target.value)}
-                            step="0.01"
-                            style={{ width: '80px', marginLeft: '10px' }}
-                        />
-                        <span className="currency">K</span>
+    return (
+        <div key={recurso.id} className="resource-row">
+            <input
+                type="text"
+                value={editedRecursos[editedRecursoIndex]?.name || ''}
+                onChange={(e) => handleInputChange(editedRecursoIndex, 'name', e.target.value)}
+                style={{ marginRight: '10px' }}
+            />
+            <input
+                type="number"
+                placeholder="Novo custo"
+                value={newCost.get(editedRecursoIndex) || ''}
+                onChange={(e) => handleInputChange(editedRecursoIndex, 'cost', e.target.value)}
+                step="0.01"
+                style={{ width: '80px', marginLeft: '10px' }}
+            />
+            <span className="currency">K</span>
+
 
                         <div className="cost-history">
                             <p>Histórico de custos:</p>

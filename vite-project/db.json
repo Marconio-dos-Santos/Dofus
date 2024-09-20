@@ -3,10 +3,19 @@
     {
       "id": "740d",
       "name": "Raiz Treechnid",
+      "type": "raiz",
       "cost": [
         {
-          "amount": 113.83,
-          "date": "2024-09-18T19:44:55.686Z"
+          "amount": 100,
+          "date": "2024-09-18T21:40:45.789Z"
+        },
+        {
+          "amount": 126.98,
+          "date": "2024-09-19T20:08:56.216Z"
+        },
+        {
+          "amount": 126.97,
+          "date": "2024-09-20T16:42:08.272Z"
         }
       ]
     },
@@ -17,6 +26,10 @@
         {
           "amount": 2299.98,
           "date": "2024-09-17T19:09:52.757Z"
+        },
+        {
+          "amount": 1999.94,
+          "date": "2024-09-19T20:15:19.332Z"
         }
       ]
     },
@@ -107,6 +120,10 @@
         {
           "amount": 4997.77,
           "date": "2024-09-17T20:16:31.261Z"
+        },
+        {
+          "amount": 4497.76,
+          "date": "2024-09-19T20:12:00.155Z"
         }
       ]
     },
@@ -139,6 +156,292 @@
           "date": "2024-09-17T20:18:18.155Z"
         }
       ]
+    },
+    {
+      "id": "dd91",
+      "name": "Cabelos de Kitsou Nakwa",
+      "cost": [
+        {
+          "amount": 639.92,
+          "date": "2024-09-19T19:09:45.222Z"
+        }
+      ]
+    },
+    {
+      "id": "b2e5",
+      "name": "Cabelos de Kitsou Nere",
+      "cost": [
+        {
+          "amount": 584.89,
+          "date": "2024-09-19T19:10:36.759Z"
+        }
+      ]
+    },
+    {
+      "id": "78e9",
+      "name": "Asas de Moskito",
+      "cost": [
+        {
+          "amount": 39.85,
+          "date": "2024-09-19T19:13:59.962Z"
+        },
+        {
+          "amount": 47.63,
+          "date": "2024-09-20T04:12:44.777Z"
+        }
+      ]
+    },
+    {
+      "id": "8d95",
+      "name": "Pêlo de Crowfox",
+      "cost": [
+        {
+          "amount": 999.69,
+          "date": "2024-09-19T19:17:12.542Z"
+        }
+      ]
+    },
+    {
+      "id": "1eb3",
+      "name": "Pêlos de Barba de Warko Violeta",
+      "cost": [
+        {
+          "amount": 15449,
+          "date": "2024-09-19T19:19:26.432Z"
+        }
+      ]
+    },
+    {
+      "id": "318d",
+      "name": "Pêlos de Peki",
+      "cost": [
+        {
+          "amount": 999.99,
+          "date": "2024-09-19T19:22:10.731Z"
+        }
+      ]
+    },
+    {
+      "id": "29ca",
+      "name": "Pêlo de Javali",
+      "cost": [
+        {
+          "amount": 49.9,
+          "date": "2024-09-19T19:23:10.188Z"
+        },
+        {
+          "amount": 44.9,
+          "date": "2024-09-20T04:29:40.580Z"
+        }
+      ]
+    },
+    {
+      "id": "6d7b",
+      "name": "Pêlo do Rato de Brakmar",
+      "cost": [
+        {
+          "amount": 555.44,
+          "date": "2024-09-19T19:24:46.029Z"
+        }
+      ]
+    },
+    {
+      "id": "a312",
+      "name": "Pêlo de Wa Wabbit",
+      "cost": [
+        {
+          "amount": 11919,
+          "date": "2024-09-19T19:26:29.368Z"
+        }
+      ]
+    },
+    {
+      "id": "c1c6",
+      "name": "Couro de Gobbly Branco",
+      "cost": [
+        {
+          "amount": 31.49,
+          "date": "2024-09-19T19:29:51.530Z"
+        },
+        {
+          "amount": 31.8,
+          "date": "2024-09-20T04:31:52.932Z"
+        }
+      ]
+    },
+    {
+      "id": "bb78",
+      "name": "Couro de Javali",
+      "cost": [
+        {
+          "amount": 96.65,
+          "date": "2024-09-19T19:30:32.433Z"
+        },
+        {
+          "amount": 71.11,
+          "date": "2024-09-20T04:33:40.088Z"
+        }
+      ]
+    },
+    {
+      "id": "8876",
+      "name": "Lã de Minotoro",
+      "cost": [
+        {
+          "amount": 1279.59,
+          "date": "2024-09-19T19:35:57.407Z"
+        }
+      ]
+    },
+    {
+      "id": "22aa",
+      "name": "Presa de Javali",
+      "cost": [
+        {
+          "amount": 62.99,
+          "date": "2024-09-19T19:38:57.289Z"
+        }
+      ]
+    },
+    {
+      "id": "0514",
+      "name": "Dente Dourado de Crackler",
+      "cost": [
+        {
+          "amount": 109.94,
+          "date": "2024-09-19T19:40:30.091Z"
+        }
+      ]
+    },
+    {
+      "id": "acda",
+      "name": "Pele de Drakoalak",
+      "cost": [
+        {
+          "amount": 8498,
+          "date": "2024-09-19T19:47:01.962Z"
+        }
+      ]
+    },
+    {
+      "id": "07e0",
+      "name": "Madeira de Kaliptus",
+      "cost": [
+        {
+          "amount": 100,
+          "date": "2024-09-19T20:03:23.701Z"
+        }
+      ]
+    },
+    {
+      "id": "0c5a",
+      "name": "Âmbar",
+      "cost": [
+        {
+          "amount": 40.99,
+          "date": "2024-09-19T20:40:20.039Z"
+        },
+        {
+          "amount": 41.99,
+          "date": "2024-09-20T04:40:56.183Z"
+        }
+      ]
+    },
+    {
+      "id": "2c21",
+      "name": "Treemanto",
+      "cost": [
+        {
+          "amount": 11000,
+          "date": "2024-09-19T20:41:15.200Z"
+        }
+      ]
+    },
+    {
+      "id": "22a8",
+      "name": "Treecapa",
+      "cost": [
+        {
+          "amount": 990,
+          "date": "2024-09-19T20:42:40.008Z"
+        }
+      ]
+    },
+    {
+      "id": "7020",
+      "name": "Treecapa Ancestral",
+      "cost": [
+        {
+          "amount": 58777,
+          "date": "2024-09-19T20:43:34.730Z"
+        }
+      ]
+    },
+    {
+      "id": "26b7",
+      "name": "Couro de Gobball",
+      "cost": [
+        {
+          "amount": 20,
+          "date": "2024-09-20T16:59:11.329Z"
+        }
+      ],
+      "type": "couro"
+    },
+    {
+      "id": "fbc8",
+      "name": "Pata de Prespic",
+      "cost": [
+        {
+          "amount": 299.95,
+          "date": "2024-09-20T17:08:32.539Z"
+        }
+      ],
+      "type": "perna"
+    },
+    {
+      "id": "1345",
+      "name": "Rabo de Prespic",
+      "cost": [
+        {
+          "amount": 49.95,
+          "date": "2024-09-20T17:10:56.620Z"
+        }
+      ],
+      "type": "cauda"
+    },
+    {
+      "id": "bff6",
+      "name": "Juba de Prespic",
+      "cost": [
+        {
+          "amount": 156,
+          "date": "2024-09-20T17:13:22.617Z"
+        }
+      ],
+      "type": "recurso"
+    },
+    {
+      "id": "08c4",
+      "name": "Estômago de Prespic",
+      "cost": [
+        {
+          "amount": 17.98,
+          "date": "2024-09-20T17:15:06.129Z"
+        }
+      ],
+      "type": "recurso"
+    },
+    {
+      "id": "0629",
+      "name": "Tecido de Prespic",
+      "cost": [
+        {
+          "amount": 149.97,
+          "date": "2024-09-20T17:17:21.533Z"
+        }
+      ],
+      "type": "tecido"
     }
   ],
   "itens": [
@@ -147,15 +450,23 @@
       "type": "Hat",
       "name": "Treecapacete Ancestral",
       "image": "Ancestral_Treechelmet.png",
-      "venda": 90000,
+      "venda": 84000,
       "receita": [
         {
           "name": "Raiz Treechnid",
           "quantity": 120,
           "cost": [
             {
-              "amount": 113.83,
-              "date": "2024-09-18T19:51:11.806Z"
+              "amount": 100,
+              "date": "2024-09-18T21:40:45.789Z"
+            },
+            {
+              "amount": 126.98,
+              "date": "2024-09-19T20:08:56.216Z"
+            },
+            {
+              "amount": 126.97,
+              "date": "2024-09-20T16:42:08.272Z"
             }
           ]
         },
@@ -165,7 +476,11 @@
           "cost": [
             {
               "amount": 2299.98,
-              "date": "2024-09-18T19:51:11.806Z"
+              "date": "2024-09-17T19:09:52.757Z"
+            },
+            {
+              "amount": 1999.94,
+              "date": "2024-09-19T20:15:19.332Z"
             }
           ]
         },
@@ -175,7 +490,7 @@
           "cost": [
             {
               "amount": 22.22,
-              "date": "2024-09-18T19:51:11.806Z"
+              "date": "2024-09-17T19:11:59.438Z"
             }
           ]
         },
@@ -185,7 +500,7 @@
           "cost": [
             {
               "amount": 1890,
-              "date": "2024-09-18T19:51:11.806Z"
+              "date": "2024-09-17T19:17:58.198Z"
             }
           ]
         },
@@ -195,7 +510,7 @@
           "cost": [
             {
               "amount": 54.99,
-              "date": "2024-09-18T19:51:11.806Z"
+              "date": "2024-09-17T19:14:34.377Z"
             }
           ]
         },
@@ -205,7 +520,7 @@
           "cost": [
             {
               "amount": 10900,
-              "date": "2024-09-18T19:51:11.806Z"
+              "date": "2024-09-17T19:16:31.291Z"
             }
           ]
         },
@@ -215,7 +530,7 @@
           "cost": [
             {
               "amount": 299.99,
-              "date": "2024-09-18T19:51:11.806Z"
+              "date": "2024-09-17T19:21:36.209Z"
             }
           ]
         }
@@ -226,7 +541,7 @@
       "type": "Hat",
       "name": "Chapéu de Carvalho Mole",
       "image": "Soft_Oak_Hat.png",
-      "venda": 179990,
+      "venda": 166500,
       "receita": [
         {
           "name": "Cogumelo Luidegît",
@@ -265,6 +580,10 @@
             {
               "amount": 4997.77,
               "date": "2024-09-17T20:16:31.261Z"
+            },
+            {
+              "amount": 4497.76,
+              "date": "2024-09-19T20:12:00.155Z"
             }
           ]
         },
@@ -305,6 +624,162 @@
             {
               "amount": 86000,
               "date": "2024-09-17T20:18:18.155Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1726777261852",
+      "type": "Capa",
+      "name": "Capa Usada de Carvalho Mole",
+      "image": "Worn_Soft_Oak_Cape.png",
+      "venda": 129000,
+      "receita": [
+        {
+          "name": "Âmbar",
+          "quantity": 200,
+          "cost": [
+            {
+              "amount": 40.99,
+              "date": "2024-09-19T20:40:20.039Z"
+            },
+            {
+              "amount": 41.99,
+              "date": "2024-09-20T04:40:56.183Z"
+            }
+          ]
+        },
+        {
+          "name": "Âmbar de Treechnid das Sombras",
+          "quantity": 5,
+          "cost": [
+            {
+              "amount": 4997.77,
+              "date": "2024-09-17T20:16:31.261Z"
+            },
+            {
+              "amount": 4497.76,
+              "date": "2024-09-19T20:12:00.155Z"
+            }
+          ]
+        },
+        {
+          "name": "Casca de Carvalho Mole",
+          "quantity": 5,
+          "cost": [
+            {
+              "amount": 6.77,
+              "date": "2024-09-17T20:15:34.029Z"
+            }
+          ]
+        },
+        {
+          "name": "Raiz de Carvalho Mole",
+          "quantity": 4,
+          "cost": [
+            {
+              "amount": 13.99,
+              "date": "2024-09-17T20:15:15.867Z"
+            }
+          ]
+        },
+        {
+          "name": "Treecapa",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 990,
+              "date": "2024-09-19T20:42:40.008Z"
+            }
+          ]
+        },
+        {
+          "name": "Treemanto",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 11000,
+              "date": "2024-09-19T20:41:15.200Z"
+            }
+          ]
+        },
+        {
+          "name": "Treecapa Ancestral",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 58777,
+              "date": "2024-09-19T20:43:34.730Z"
+            }
+          ]
+        },
+        {
+          "name": "Broto de Carvalho Mole",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 37.76,
+              "date": "2024-09-17T20:17:44.720Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1726852657411",
+      "type": "Hat",
+      "name": "Peruca de Prespic",
+      "image": "",
+      "venda": 8000,
+      "receita": [
+        {
+          "name": "Pata de Prespic",
+          "quantity": 25,
+          "cost": [
+            {
+              "amount": 299.95,
+              "date": "2024-09-20T17:08:32.539Z"
+            }
+          ]
+        },
+        {
+          "name": "Rabo de Prespic",
+          "quantity": 11,
+          "cost": [
+            {
+              "amount": 49.95,
+              "date": "2024-09-20T17:10:56.620Z"
+            }
+          ]
+        },
+        {
+          "name": "Juba de Prespic",
+          "quantity": 3,
+          "cost": [
+            {
+              "amount": 156,
+              "date": "2024-09-20T17:13:22.617Z"
+            }
+          ]
+        },
+        {
+          "name": "Estômago de Prespic",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 17.98,
+              "date": "2024-09-20T17:15:06.129Z"
+            }
+          ]
+        },
+        {
+          "name": "Tecido de Prespic",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 149.97,
+              "date": "2024-09-20T17:17:21.533Z"
             }
           ]
         }
@@ -390,7 +865,7 @@
           ]
         }
       ],
-      "status": "na loja"
+      "status": "vendido"
     },
     {
       "id": "1726602339146",
@@ -641,6 +1116,85 @@
         }
       ],
       "status": "na loja"
+    },
+    {
+      "id": "1726601901040",
+      "type": "Hat",
+      "name": "Treecapacete Ancestral",
+      "image": "Ancestral_Treechelmet.png",
+      "venda": 90000,
+      "receita": [
+        {
+          "name": "Raiz Treechnid",
+          "quantity": 120,
+          "cost": [
+            {
+              "amount": 100,
+              "date": "2024-09-18T21:41:16.035Z"
+            }
+          ]
+        },
+        {
+          "name": "Botão de Treechnid das Sombras",
+          "quantity": 20,
+          "cost": [
+            {
+              "amount": 2299.98,
+              "date": "2024-09-18T21:41:16.035Z"
+            }
+          ]
+        },
+        {
+          "name": "Casca de Treechnid Ancestral",
+          "quantity": 3,
+          "cost": [
+            {
+              "amount": 22.22,
+              "date": "2024-09-18T21:41:16.035Z"
+            }
+          ]
+        },
+        {
+          "name": "Raiz de Treechnid Ancestral",
+          "quantity": 3,
+          "cost": [
+            {
+              "amount": 1890,
+              "date": "2024-09-18T21:41:16.035Z"
+            }
+          ]
+        },
+        {
+          "name": "Raiz de Treechnid das Sombras",
+          "quantity": 2,
+          "cost": [
+            {
+              "amount": 54.99,
+              "date": "2024-09-18T21:41:16.035Z"
+            }
+          ]
+        },
+        {
+          "name": "Treecapacete",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 10900,
+              "date": "2024-09-18T21:41:16.035Z"
+            }
+          ]
+        },
+        {
+          "name": "Âmbar Ancestral",
+          "quantity": 1,
+          "cost": [
+            {
+              "amount": 299.99,
+              "date": "2024-09-18T21:41:16.035Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
